@@ -6,6 +6,7 @@ public class ShootingSystem : MonoBehaviour
 {
     public PlayerMovement PlayerMovement;
     public LineRenderer lineRenderer;
+    PlayerInput playerInput;
     public float laserRange;
 
     private void Start()
@@ -16,7 +17,7 @@ public class ShootingSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerMovement.PlayerInput.FindAction("Shoot").IsPressed())
+        if (PlayerMovement.playerInput.FindAction("Shoot").IsPressed())
         {
             lineRenderer.enabled = true;
             ShootLaser();

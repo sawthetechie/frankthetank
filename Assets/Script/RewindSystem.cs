@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,34 +7,42 @@ namespace Script
 {
     public class RewindSystem : MonoBehaviour
     {
-        private float lastUpdatedTime;
-        private float elapsedTime;
+        public float moveSpeed;
+        public float rotationSpeed;
+        Rigidbody2D rb;
+        PlayerInput playerInput;
 
-        [SerializeField] private int rewindFrame;
-        PlayerInput PlayerInput;
-
-        void Start()
+        private void OnEnable()
         {
-            lastUpdatedTime = 0f;
-            PlayerInput = new PlayerInput();
-            PlayerInput.Enable();
+            playerInput = new PlayerInput();
+            playerInput.Enable();
+            rb = GetComponent<Rigidbody2D>();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
-        void LateUpdate()
+        void FixedUpdate()
         {
-            elapsedTime += Time.deltaTime;
-            if (PlayerInput.Player.Rewind.IsPressed())
-            {
-                FrameDetail targetFrame = FramesInfo.GetFrameDetail(Mathf.FloorToInt(elapsedTime % rewindFrame));
-                transform.position = targetFrame.position;
-
-            }
+            RotatePlayer();
+            MovePlayer();
         }
-
-        void Rewind()
+        
+        void MovePlayer()
         {
+            Vector2 axis = playerInput.FindAction("Walk").ReadValue<Vector2>();
+            Vector2 forwardMove = transform.up * axis.y;
+            Vector2 sideMove = transform.right * axis.x;
             
+            Vector2 finalVelocity = (forwardMove + sideMove).normalized * moveSpeed;
+
+            rb.velocity = finalVelocity; // ← changed from rb.linearVelocity
         }
 
+        void RotatePlayer()
+        {
+            var input = playerInput.FindAction("Rotate").ReadValue<Vector2>();
+            float rotationAmount = input.x * rotationSpeed * Time.deltaTime;
+            transform.Rotate(0, 0, -rotationAmount); 
+        }
     }
 }
