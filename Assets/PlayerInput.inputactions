@@ -3,7 +3,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Player",
+            "name": "Tank",
             "id": "cb069a06-b860-48ac-86a0-65e097793ba0",
             "actions": [
                 {
@@ -19,7 +19,16 @@
                     "name": "Walk",
                     "type": "Value",
                     "id": "0ec377fe-3136-4a63-9b24-d40a5a883210",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "9f7802af-b23c-433a-b3e1-178b2e989a95",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -32,15 +41,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Rotate",
-                    "type": "Value",
-                    "id": "a09d99fc-bd9a-4a04-8b7e-b8d4ede97b0c",
-                    "expectedControlType": "Delta",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -56,9 +56,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "1D Axis",
                     "id": "c02db33b-b7d6-4f46-8ecb-01fcd50f8875",
-                    "path": "2DVector",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -67,19 +67,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Up",
+                    "name": "Negative",
                     "id": "c27354b7-7c49-46e8-856b-5a06755772c0",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Down",
-                    "id": "78c94224-0851-4064-ac6c-73a73049e433",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -89,20 +78,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Left",
-                    "id": "1f9ae470-0db9-4e10-b323-51239b0ee9a3",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Right",
-                    "id": "c4f61abf-0b1a-4ab7-8035-5bc46d778977",
-                    "path": "<Keyboard>/d",
+                    "name": "Positive",
+                    "id": "78c94224-0851-4064-ac6c-73a73049e433",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -122,8 +100,58 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "1D Axis",
+                    "id": "57937096-cd6b-479c-953c-39269856c5a3",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "969bbf6a-1807-48bf-8dfb-ec4f0e2f772f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cd6870f9-7f4f-4f0f-b741-f62a3a0860d2",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "TankHead",
+            "id": "17b985ee-d92e-4c8b-9828-ac9395a5d0ce",
+            "actions": [
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "41086347-89c7-4346-8cec-25c9a76aba7d",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "71cf0ca9-079f-4ab7-a5d1-0e26725e2e75",
+                    "id": "3bb5445a-6ed9-4203-83e7-1c80e070c352",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
